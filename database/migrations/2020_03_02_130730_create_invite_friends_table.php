@@ -15,6 +15,8 @@ class CreateInviteFriendsTable extends Migration
     {
         Schema::create('invite_friends', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('user_id');
+            $table->string('invited_email');
             $table->timestamps();
         });
     }

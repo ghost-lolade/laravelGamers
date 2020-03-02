@@ -15,6 +15,11 @@ class CreateReportsTable extends Migration
     {
         Schema::create('reports', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('user_id');
+            $table->string('refrence_code');
+            $table->string('issues');
+            $table->string('status');
+            $table->dateTime('date_resolved');
             $table->timestamps();
         });
     }

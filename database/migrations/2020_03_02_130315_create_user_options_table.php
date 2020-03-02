@@ -15,6 +15,9 @@ class CreateUserOptionsTable extends Migration
     {
         Schema::create('user_options', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('user_id');
+            $table->string('discussion_id');
+            $table->string('selected_option');
             $table->timestamps();
         });
     }

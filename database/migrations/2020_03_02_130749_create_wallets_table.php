@@ -15,6 +15,12 @@ class CreateWalletsTable extends Migration
     {
         Schema::create('wallets', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('user_id');
+            $table->integer('card_no');
+            $table->date('card_exp_date');
+            $table->integer('cvv');
+            $table->decimal('amount');
+            $table->decimal('total_amount');
             $table->timestamps();
         });
     }

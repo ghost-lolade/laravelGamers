@@ -15,6 +15,10 @@ class CreateDiscussionGroupsTable extends Migration
     {
         Schema::create('discussion_groups', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('user_id');
+            $table->integer('discussion_id');
+            $table->string('status');
+            $table->string('payment_status');
             $table->timestamps();
         });
     }
