@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Comment;
 use Illuminate\Http\Request;
+use App\Http\Controllers\API\BaseController as BaseController;
 
-class CommentController extends Controller
+class CommentController extends BaseController
 {
     /**
      * Display a listing of the resource.

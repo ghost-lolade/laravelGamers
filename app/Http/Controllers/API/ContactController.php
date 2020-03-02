@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Contact;
 use Illuminate\Http\Request;
+use App\Http\Controllers\API\BaseController as BaseController;
 
-class ContactController extends Controller
+class ContactController extends BaseController
 {
     /**
      * Display a listing of the resource.

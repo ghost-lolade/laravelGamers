@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Discussion;
 use Illuminate\Http\Request;
+use App\Http\Controllers\API\BaseController as BaseController;
 
-class DiscussionController extends Controller
+class DiscussionController extends BaseController
 {
     /**
      * Display a listing of the resource.

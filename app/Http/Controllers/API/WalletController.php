@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Wallet;
 use Illuminate\Http\Request;
+use App\Http\Controllers\API\BaseController as BaseController;
 
-class WalletController extends Controller
+class WalletController extends BaseController
 {
     /**
      * Display a listing of the resource.

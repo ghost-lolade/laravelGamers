@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\InviteFriend;
 use Illuminate\Http\Request;
+use App\Http\Controllers\API\BaseController as BaseController;
 
-class InviteFriendController extends Controller
+class InviteFriendController extends BaseController
 {
     /**
      * Display a listing of the resource.

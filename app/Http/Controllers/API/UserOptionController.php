@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\UserOption;
 use Illuminate\Http\Request;
+use App\Http\Controllers\API\BaseController as BaseController;
 
-class UserOptionController extends Controller
+class UserOptionController extends BaseController
 {
     /**
      * Display a listing of the resource.
