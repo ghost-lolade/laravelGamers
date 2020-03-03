@@ -8,14 +8,17 @@ use App\Http\Controllers\API\BaseController as BaseController;
 
 class DiscussionController extends BaseController
 {
+    public function __construct()
+    {
+         $this->middleware('auth:api')->except('index', 'show');
+    }
+
     /**
-     * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
+        return DiscussionResource::collection(Discussion::paginate(5));
     }
 
     /**
@@ -34,9 +37,30 @@ class DiscussionController extends BaseController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Discussion $discussion, Request $request)
     {
-        //
+        $discussion = new Discussion;
+        $discussion->user_id = $request->user_id;
+        $discussion->topic = $request->topic;
+        $discussion->details = $request->details;
+        $discussion->option_a = $request->option_a;
+        $discussion->option_b = $request->option_b;
+        $discussion->option_c = $request->option_c;
+        $discussion->option_d = $request->option_d;
+        $discussion->status = $request->status;
+        $discussion->answer = $request->answer;
+        $discussion->winner_id = $request->winner_id;
+        $discussion->amount = $request->amount;
+        $discussion->referee = $request->referee;
+
+
+        $discussion->save();
+
+        return response([
+
+            'data' => new DiscussionResource($discussion)
+
+        ], 'Discussion created successfully');
     }
 
     /**
@@ -47,7 +71,7 @@ class DiscussionController extends BaseController
      */
     public function show(Discussion $discussion)
     {
-        //
+        return new DiscussionResource($discussion);
     }
 
     /**
@@ -70,7 +94,19 @@ class DiscussionController extends BaseController
      */
     public function update(Request $request, Discussion $discussion)
     {
-        //
+        $this->userAuthorize($discussion);
+
+        $request['Winner'] = $request->description;
+
+        unset($request['Winner_id']);
+
+        $discussion->update($request->all());
+
+       return response([
+
+         'data' => new Discussion($discussion)
+
+       ],Response::HTTP_CREATED);
     }
 
     /**
@@ -81,6 +117,14 @@ class DiscussionController extends BaseController
      */
     public function destroy(Discussion $discussion)
     {
-        //
+        $discussion->delete();
+
+        return response(null, 'Discussion deleted');
+    }
+
+    public function userAuthorize($discussion){
+        if(Auth::user()->id != $discussion->user_id){
+
+        }
     }
 }
