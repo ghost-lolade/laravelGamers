@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Discussion;
+use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\Request;
+use App\Http\Resources\DiscussionResource;
+use App\Http\Requests\Discussion as DiscussionRequest;
 //use App\Http\Controllers\API\BaseController as BaseController;
 
 class DiscussionController extends Controller
@@ -18,7 +21,7 @@ class DiscussionController extends Controller
      */
     public function index()
     {
-        return Discussion::all();
+        return DiscussionResource::collection(Discussion::paginate(20));
     }
 
     /**
@@ -37,7 +40,7 @@ class DiscussionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Discussion $discussion, Request $request)
+    public function store(DiscussionRequest $request)
     {
         $discussion = new Discussion;
         $discussion->user_id = $request->user_id;
@@ -51,7 +54,7 @@ class DiscussionController extends Controller
         $discussion->answer = $request->answer;
         $discussion->winner_id = $request->winner_id;
         $discussion->amount = $request->amount;
-        $discussion->referee = $request->referee;
+        $discussion->refree_id = $request->refree_id;
 
 
         $discussion->save();
@@ -60,7 +63,7 @@ class DiscussionController extends Controller
 
             'data' => new DiscussionResource($discussion)
 
-        ], 'Discussion created successfully');
+        ], Response::HTTP_CREATED);
     }
 
     /**
@@ -124,7 +127,7 @@ class DiscussionController extends Controller
 
     public function userAuthorize($discussion){
         if(Auth::user()->id != $discussion->user_id){
-
+            return 'Unauthenticated';
         }
     }
 }
