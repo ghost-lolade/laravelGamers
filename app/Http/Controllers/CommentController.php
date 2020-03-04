@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Comment;
 use Illuminate\Http\Request;
-use App\Http\Controllers\API\BaseController as BaseController;
+//use App\Http\Controllers\API\BaseController as BaseController;
 
-class CommentController extends BaseController
+class CommentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,7 @@ class CommentController extends BaseController
      */
     public function index()
     {
-        //
+        return Comment::all();
     }
 
     /**
@@ -34,9 +34,10 @@ class CommentController extends BaseController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Comment $comment, Request $request)
     {
-        //
+       $discussion = new Discussion;
+ 
     }
 
     /**

@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Discussion;
 use Illuminate\Http\Request;
-use App\Http\Controllers\API\BaseController as BaseController;
+//use App\Http\Controllers\API\BaseController as BaseController;
 
-class DiscussionController extends BaseController
+class DiscussionController extends Controller
 {
     public function __construct()
     {
@@ -18,7 +18,7 @@ class DiscussionController extends BaseController
      */
     public function index()
     {
-        return DiscussionResource::collection(Discussion::paginate(5));
+        return Discussion::all();
     }
 
     /**
@@ -96,9 +96,9 @@ class DiscussionController extends BaseController
     {
         $this->userAuthorize($discussion);
 
-        $request['Winner'] = $request->description;
+        $request['Winner'] = $request->winner_id;
 
-        unset($request['Winner_id']);
+        unset($request['winner_id']);
 
         $discussion->update($request->all());
 

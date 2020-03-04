@@ -28,11 +28,15 @@ class Discussion extends Model
         'answer',
         'winner_id',
         'amount',
-        'referee'
+        'refree_id'
     ];
     
     public function user(){
         return $this->belongsTo(User::class);
+    }
+
+    public function comments(){
+        return $this->hasMany(Comment::class);
     }
 
 }
