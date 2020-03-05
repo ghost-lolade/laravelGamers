@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\BaseController;
+use App\Http\Controllers\API\BaseController;
 use Illuminate\Http\Request;
 use Validator;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 
-class RegisterController extends Controller
+class RegisterController extends BaseController
 {
     public function register(Request $request){
         $validator = Validator::make($request->all(), [

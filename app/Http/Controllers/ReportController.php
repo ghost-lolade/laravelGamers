@@ -10,7 +10,7 @@ use App\Http\Requests\Report as ReportRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\API\BaseController as BaseController;
 
-class ReportController extends BaseController
+class ReportController extends Controller
 {
     /**
      * Display a listing of the resource.
