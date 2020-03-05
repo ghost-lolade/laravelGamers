@@ -10,7 +10,7 @@ class Report extends Model
 {
     protected $fillable = [
         'user_id',
-        'reference_code',
+        'refrence_code',
         'issues',
         'status',
         'date_resolved'

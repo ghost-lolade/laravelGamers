@@ -21,6 +21,7 @@ Route::post('register', 'RegisterController@register');
 Route::post('login', 'RegisterController@login');
 
 Route::apiResource('/discussion','DiscussionController');
+
 Route::group(['prefix' => 'discussion'],function(){
 
   Route::apiResource('/{discussion}/discussion_group','DiscussionGroupController');
@@ -32,3 +33,9 @@ Route::group(['prefix' => 'discussion'],function(){
     Route::apiResource('/{discussion}/comments','CommentController');
   
   });
+
+Route::group(['prefix' => 'user'],function(){
+
+  Route::apiResource('/{user}/report','ReportController');
+
+});

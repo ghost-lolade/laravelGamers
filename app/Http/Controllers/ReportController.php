@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Report;
+use App\User;
+use Symfony\Component\HttpFoundation\Response;
+use App\Http\Resources\ReportResource;
+use App\Http\Requests\Report as ReportRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\API\BaseController as BaseController;
 
@@ -13,9 +17,9 @@ class ReportController extends BaseController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(User $user)
     {
-        //
+        return ReportResource::collection($user->report);
     }
 
     /**
@@ -34,9 +38,15 @@ class ReportController extends BaseController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ReportRequest $request, User $user)
     {
-        //
+        $report = new Report($request->all());
+       
+        $user->report()->save($report);
+       
+        return response([
+          'data' => new ReportResource($report)
+        ], Response::HTTP_CREATED);//
     }
 
     /**
@@ -47,7 +57,7 @@ class ReportController extends BaseController
      */
     public function show(Report $report)
     {
-        //
+        return new ReportResource($report);
     }
 
     /**
@@ -70,7 +80,7 @@ class ReportController extends BaseController
      */
     public function update(Request $request, Report $report)
     {
-        //
+        $report->update($request->all());
     }
 
     /**
@@ -81,6 +91,7 @@ class ReportController extends BaseController
      */
     public function destroy(Report $report)
     {
-        //
+        $report->delete();
+        return response(null,Response::HTTP_NO_CONTENT);
     }
 }
