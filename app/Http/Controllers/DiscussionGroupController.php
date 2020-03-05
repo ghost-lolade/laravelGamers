@@ -3,19 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\DiscussionGroup;
+use App\Discussion;
+use Symfony\Component\HttpFoundation\Response;
+use App\Http\Resources\DiscussionGroupResource;
 use Illuminate\Http\Request;
+use App\Http\Requests\DiscussionGroup as DiscussionGroupRequest;
 use App\Http\Controllers\API\BaseController as BaseController;
 
-class DiscussionGroupController extends BaseController
+class DiscussionGroupController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Discussion $discussion)
     {
-        //
+        return DiscussionGroupResource::collection($discussion->discussion_group);
     }
 
     /**
@@ -34,9 +38,16 @@ class DiscussionGroupController extends BaseController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DiscussionGroupRequest $request, Discussion $discussion)
     {
-        //
+        $discussion_group = new DiscussionGroup($request->all());
+       
+        $discussion->discussion_group()->save($discussion_group);
+       
+        return response([
+          'data' => new DiscussionGroupResource($discussion_group)
+        ], Response::HTTP_CREATED);
+ 
     }
 
     /**
@@ -47,7 +58,7 @@ class DiscussionGroupController extends BaseController
      */
     public function show(DiscussionGroup $discussionGroup)
     {
-        //
+        return new DiscussionGroupResource($discussion_group);
     }
 
     /**
@@ -70,7 +81,7 @@ class DiscussionGroupController extends BaseController
      */
     public function update(Request $request, DiscussionGroup $discussionGroup)
     {
-        //
+        $discussion_group->update($request->all());
     }
 
     /**
@@ -81,6 +92,7 @@ class DiscussionGroupController extends BaseController
      */
     public function destroy(DiscussionGroup $discussionGroup)
     {
-        //
+        $discussion_group->delete();
+        return response(null,Response::HTTP_NO_CONTENT);
     }
 }

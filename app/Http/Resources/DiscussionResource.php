@@ -25,7 +25,8 @@ class DiscussionResource extends JsonResource
         'amount' => $this->amount,
         'refree_id' => $this->refree_id,
         'href' => [
-            'comments' =>route('comments.index', $this->id)
+            'comments' =>route('comments.index', $this->id),
+            'group' => route('discussion_group.index', $this->id)
         ],
         'user_id' => $this->user_id
         ];

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Comment;
 use App\Discussion;
+use Symfony\Component\HttpFoundation\Response;
 use App\Http\Resources\CommentResource;
 use Illuminate\Http\Request;
 use App\Http\Requests\Comment as CommentRequest;
@@ -39,13 +40,13 @@ class CommentController extends Controller
      */
     public function store(CommentRequest $request, Discussion $discussion)
     {
-        $discussion = new Discussion($request->all());
+        $comment = new Comment($request->all());
        
-        $discussion->comments()->save($comments);
+        $discussion->comments()->save($comment);
        
         return response([
           'data' => new CommentResource($comment)
-        ], 'Comments created');
+        ], Response::HTTP_CREATED);
  
     }
 

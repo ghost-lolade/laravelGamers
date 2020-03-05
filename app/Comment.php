@@ -20,6 +20,6 @@ class Comment extends Model
     }
 
     public function discussion(){
-        return $this->belongsTO(Discussion::class);
+        return $this->belongsTo(Discussion::class);
     }
 }

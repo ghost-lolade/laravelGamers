@@ -39,4 +39,8 @@ class Discussion extends Model
         return $this->hasMany(Comment::class);
     }
 
+    public function discussion_group(){
+        return $this->hasMany(DiscussionGroup::class);
+    }
+
 }
