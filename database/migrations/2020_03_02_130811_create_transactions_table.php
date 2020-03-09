@@ -23,6 +23,7 @@ class CreateTransactionsTable extends Migration
             $table->string('bank_name');
             $table->integer('account_number');
             $table->dateTime('transaction_date');
+            $table->integer('balance');
             $table->timestamps();
         });
     }

@@ -14,10 +14,15 @@ class Transaction extends Model
         'account_name',
         'bank_name',
         'account_number',
-        'transaction_date'
+        'transaction_date',
+        'balance'
     ];
 
     public function user(){
         return $this->belongsTo(User::class);
     }
+
+    //public function wallet(){
+    //    return $this->belongsTo(Wallet::class);
+    //}
 }
