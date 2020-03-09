@@ -45,3 +45,9 @@ Route::group(['prefix' => 'user'],function(){
   Route::apiResource('/{user}/transaction','TransactionController');
 
 });
+
+Route::group(['prefix' => 'user'],function(){
+
+  Route::apiResource('/{user}/user_option','UserOptionController');
+
+});

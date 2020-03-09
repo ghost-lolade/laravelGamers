@@ -78,6 +78,6 @@ class User extends Authenticatable
     }
 
     public function user_option(){
-        return $this->hasOne(UserOption::class);
+        return $this->hasMany(UserOption::class);
     }
 }
