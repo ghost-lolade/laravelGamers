@@ -57,3 +57,9 @@ Route::group(['prefix' => 'user'],function(){
   Route::apiResource('/{user}/wallet','WalletController');
 
 });
+
+Route::group(['prefix' => 'user'],function(){
+
+  Route::apiResource('/{user}/contact','ContactController');
+
+});
