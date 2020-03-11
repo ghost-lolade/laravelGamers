@@ -74,7 +74,7 @@ class User extends Authenticatable
     }
 
     public function wallet(){
-        return $this->hasOne(Wallet::class);
+        return $this->hasMany(Wallet::class);
     }
 
     public function user_option(){

@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Wallet;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\API\BaseController as BaseController;
+use Symfony\Component\HttpFoundation\Response;
+use App\Http\Resources\WalletResource;
+use App\Http\Requests\Wallet as WalletRequest;
 
 class WalletController extends BaseController
 {
@@ -13,9 +17,9 @@ class WalletController extends BaseController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(User $user)
     {
-        //
+        return WalletResource::collection($user->wallet);
     }
 
     /**
@@ -34,9 +38,15 @@ class WalletController extends BaseController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(WalletRequest $request, User $user)
     {
-        //
+        $wallet = new Wallet($request->all());
+       
+        $user->wallet()->save($wallet);
+       
+        return response([
+          'data' => new WalletResource($wallet)
+        ], Response::HTTP_CREATED);//
     }
 
     /**
@@ -47,7 +57,7 @@ class WalletController extends BaseController
      */
     public function show(Wallet $wallet)
     {
-        //
+        return new WalletResource($wallet);
     }
 
     /**
@@ -70,7 +80,7 @@ class WalletController extends BaseController
      */
     public function update(Request $request, Wallet $wallet)
     {
-        //
+        $wallet->update($request->all());
     }
 
     /**
@@ -81,6 +91,7 @@ class WalletController extends BaseController
      */
     public function destroy(Wallet $wallet)
     {
-        //
+        $wallet->delete();
+        return response(null,Response::HTTP_NO_CONTENT);
     }
 }
