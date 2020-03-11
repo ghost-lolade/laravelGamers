@@ -2,13 +2,24 @@
 
 namespace App;
 
+use App\Discussion;
+use App\Comment;
+use App\Contact;
+use App\DiscussionGroup;
+use App\InviteFriend;
+use App\Report;
+use App\Transaction;
+use App\UserOption;
+use App\Wallet;
+
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use HasApiTokens, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -19,14 +30,11 @@ class User extends Authenticatable
         'name', 'email', 'password',
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
+    
     protected $hidden = [
         'password', 'remember_token',
     ];
+
 
     /**
      * The attributes that should be cast to native types.
@@ -36,4 +44,40 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function discussion(){
+        return $this->hasMany(Discussion::class);
+    }
+
+    public function comment(){
+        return $this->hasMany(Comment::class);
+    }
+
+    public function contact(){
+        return $this->hasMany(Contact::class);
+    }
+
+    public function report(){
+        return $this->hasMany(Report::class);
+    }
+
+    public function discussion_group(){
+        return $this->hasMany(DiscussionGroup::class);
+    }
+
+    public function invite_friend(){
+        return $this->hasMany(InviteFriend::class);
+    }
+
+    public function transactions(){
+        return $this->hasMany(Transaction::class);
+    }
+
+    public function wallet(){
+        return $this->hasMany(Wallet::class);
+    }
+
+    public function user_option(){
+        return $this->hasMany(UserOption::class);
+    }
 }

@@ -16,3 +16,56 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('register', 'RegisterController@register');
+Route::post('login', 'RegisterController@login');
+
+Route::apiResource('/discussion','DiscussionController');
+
+Route::group(['prefix' => 'discussion'],function(){
+
+  Route::apiResource('/{discussion}/discussion_group','DiscussionGroupController');
+
+});
+
+Route::group(['prefix' => 'discussion'],function(){
+
+    Route::apiResource('/{discussion}/comments','CommentController');
+  
+  });
+
+Route::group(['prefix' => 'user'],function(){
+
+  Route::apiResource('/{user}/report','ReportController');
+
+});
+
+Route::group(['prefix' => 'user'],function(){
+
+  Route::apiResource('/{user}/transaction','TransactionController');
+
+});
+
+Route::group(['prefix' => 'user'],function(){
+
+  Route::apiResource('/{user}/user_option','UserOptionController');
+
+});
+
+Route::group(['prefix' => 'user'],function(){
+
+  Route::apiResource('/{user}/wallet','WalletController');
+
+});
+
+Route::group(['prefix' => 'user'],function(){
+
+  Route::apiResource('/{user}/contact','ContactController');
+
+});
+
+Route::group(['prefix' => 'user'],function(){
+
+  Route::apiResource('/{user}/invite_friend','InviteFriendController');
+
+});
