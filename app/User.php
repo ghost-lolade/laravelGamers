@@ -66,7 +66,7 @@ class User extends Authenticatable
     }
 
     public function invite_friend(){
-        return $this->hasMany(InvitedFriend::class);
+        return $this->hasMany(InviteFriend::class);
     }
 
     public function transactions(){

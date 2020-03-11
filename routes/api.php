@@ -63,3 +63,9 @@ Route::group(['prefix' => 'user'],function(){
   Route::apiResource('/{user}/contact','ContactController');
 
 });
+
+Route::group(['prefix' => 'user'],function(){
+
+  Route::apiResource('/{user}/invite_friend','InviteFriendController');
+
+});
